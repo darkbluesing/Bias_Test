@@ -35,9 +35,9 @@ export function ResultChart({
   translations = {}
 }: ResultChartProps) {
   const chartSize = {
-    sm: { width: 200, height: 200, innerRadius: 60, strokeWidth: 20, fontSize: 'text-4xl' },
-    md: { width: 256, height: 256, innerRadius: 80, strokeWidth: 24, fontSize: 'text-5xl' },
-    lg: { width: 280, height: 280, innerRadius: 90, strokeWidth: 28, fontSize: 'text-5xl' }
+    sm: { width: 200, height: 200, innerRadius: 60, strokeWidth: 20, fontSize: 'text-3xl' },
+    md: { width: 256, height: 256, innerRadius: 80, strokeWidth: 24, fontSize: 'text-4xl' },
+    lg: { width: 280, height: 280, innerRadius: 90, strokeWidth: 28, fontSize: 'text-4xl' }
   }[size];
 
   // 번역된 제목 사용, 사용자 이름이 있으면 포함
@@ -77,8 +77,16 @@ export function ResultChart({
           }
           
           .chart-${chartId} {
-            stroke-dashoffset: ${circumference};
+            stroke-dashoffset: ${targetStrokeDashoffset}; /* 최종 상태를 기본값으로 */
             animation: drawChart-${chartId} 2s ease-out 0.5s forwards !important;
+          }
+          
+          /* 이미지 캡처 시 애니메이션 비활성화 */
+          @media print, (max-resolution: 1dppx) {
+            .chart-${chartId} {
+              animation: none !important;
+              stroke-dashoffset: ${targetStrokeDashoffset} !important;
+            }
           }
           
           .chart-text-${chartId} {
@@ -86,6 +94,11 @@ export function ResultChart({
             visibility: visible !important;
             opacity: 1 !important;
             z-index: 999 !important;
+            position: absolute !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            pointer-events: none !important;
           }
         `
       }} />
@@ -147,7 +160,7 @@ export function ResultChart({
           
           {/* 중앙 텍스트 - %만 표시 */}
           <div className={`absolute inset-0 flex items-center justify-center pointer-events-none chart-text-${chartId}`}>
-            <div className="text-center">
+            <div className="text-center flex items-center justify-center h-full w-full">
               <div 
                 className={`${chartSize.fontSize} font-black leading-none`}
                 style={{ 
@@ -156,7 +169,11 @@ export function ResultChart({
                   display: 'block',
                   visibility: 'visible',
                   opacity: 1,
-                  zIndex: 999
+                  zIndex: 999,
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)'
                 }}
               >
                 {percentage}%

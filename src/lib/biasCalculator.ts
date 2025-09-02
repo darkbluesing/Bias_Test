@@ -1,4 +1,4 @@
-import { getBiasCategory } from '@/data/solutions';
+import { getBiasCategory, mapToMainCategory } from '@/data/solutions';
 import { TestResult, SupportedLanguage } from '@/types';
 
 export class BiasCalculator {
@@ -129,7 +129,7 @@ export class BiasCalculator {
       const result: TestResult = {
         totalScore,
         percentage,
-        category: biasCategory.category,
+        category: mapToMainCategory(biasCategory.category),
         solutions: biasCategory.solutions,
         completedAt: new Date().toISOString() // ISO string으로 저장하여 직렬화 문제 해결
       };

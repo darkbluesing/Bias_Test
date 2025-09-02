@@ -80,14 +80,14 @@ export default function HomePage() {
       <main className="px-4 py-12">
         <div className="max-w-mobile mx-auto">
           {/* 광고 공간 - 상단 배너 */}
-          <div className="mb-12">
-            <div className="bg-gray-100 rounded-lg h-20 flex items-center justify-center text-gray-500 text-sm">
+          <div className="mb-3">
+            <div className="bg-gray-100 rounded-lg h-16 flex items-center justify-center text-gray-500 text-sm">
               광고 공간 (728x90 / 320x50)
             </div>
           </div>
 
           {/* 확장된 테스트 시작 카드 - 제목/설명 포함 */}
-          <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 mb-12" style={{ minHeight: '500px' }}>
+          <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 mb-3" style={{ minHeight: '500px' }}>
             <div className="max-w-2xl mx-auto">
               {/* 제목과 설명을 카드 내부로 이동 */}
               <div className="text-center mb-12">
@@ -140,7 +140,7 @@ export default function HomePage() {
 
           {/* 광고 공간 - 하단 배너 */}
           <div className="mb-8">
-            <div className="bg-gray-100 rounded-lg h-20 flex items-center justify-center text-gray-500 text-sm">
+            <div className="bg-gray-100 rounded-lg h-16 flex items-center justify-center text-gray-500 text-sm">
               광고 공간 (728x90 / 320x50)
             </div>
           </div>

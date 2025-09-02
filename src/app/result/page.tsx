@@ -137,7 +137,6 @@ export default function ResultPage() {
     router.push('/');
   };
 
-
   return (
     <div className="min-h-screen bg-gray-50">
       {/* 헤더 */}
@@ -165,7 +164,7 @@ export default function ResultPage() {
           </div>
 
           {/* 통합된 결과 컨테이너 - 동적 높이로 변경 */}
-          <div id="result-content" className="bg-white rounded-xl shadow-lg overflow-visible" style={{ width: '100%', maxWidth: '100%' }}>
+          <div id="result-container" className="bg-white rounded-xl shadow-lg overflow-visible" style={{ width: '100%', maxWidth: '100%', minHeight: '600px' }}>
             <ResultChart
               percentage={result.percentage}
               category={result.category}
@@ -222,7 +221,6 @@ export default function ResultPage() {
                   ))}
                 </div>
               </div>
-
             </div>
           </div>
 
@@ -236,7 +234,7 @@ export default function ResultPage() {
           {/* 액션 버튼들 - 광고 하단 */}
           <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mt-4" data-hide-in-export="true">
             <ShareButton 
-              resultElementId="result-content"
+              resultElementId="result-container"
               percentage={result.percentage}
               className="px-6 py-2 text-base"
               buttonText={t.result.shareButton}

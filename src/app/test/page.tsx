@@ -23,7 +23,7 @@ export default function TestPage() {
     language,
     userProfile,
     nextQuestion,
-    prevQuestion,
+    previousQuestion,
     submitAnswer,
     setResult,
     getCurrentAnswer,
@@ -234,7 +234,7 @@ export default function TestPage() {
       return;
     }
     
-    prevQuestion();
+    previousQuestion();
   };
 
   const handleSubmitTest = async () => {
@@ -286,8 +286,7 @@ export default function TestPage() {
       <div className="bg-white px-4 py-4 border-b sticky top-0 z-10">
         <div className="max-w-mobile mx-auto">
           <ProgressBar
-            current={currentQuestion + 1}
-            total={questions.length}
+            progress={Math.round(((currentQuestion + 1) / questions.length) * 100)}
             className="mb-2"
           />
           <p className="text-center text-sm text-gray-600">
@@ -300,8 +299,8 @@ export default function TestPage() {
       <main className="px-4 py-8">
         <div className="max-w-mobile mx-auto" style={{ minHeight: '80vh' }}>
           {/* 광고 공간 - 상단 */}
-          <div className="mb-8">
-            <div className="bg-gray-100 rounded-lg h-20 flex items-center justify-center text-gray-500 text-sm">
+          <div className="mb-3">
+            <div className="bg-gray-100 rounded-lg h-16 flex items-center justify-center text-gray-500 text-sm">
               광고 공간 (728x90 / 320x50)
             </div>
           </div>
@@ -310,15 +309,21 @@ export default function TestPage() {
           {/* 질문 카드 */}
           <QuestionCard
             question={currentQuestionData}
-            onAnswer={handleAnswer}
-            selectedAnswer={getCurrentAnswer()}
             questionNumber={currentQuestion + 1}
+            totalQuestions={questions.length}
+            selectedAnswer={getCurrentAnswer()}
+            onAnswerSelect={handleAnswer}
+            onPrevious={handlePrevious}
+            onNext={handleNext}
+            isFirstQuestion={currentQuestion === 0}
+            isLastQuestion={currentQuestion === questions.length - 1}
+            translations={t.test}
             className=""
           />
 
           {/* 광고 공간 - 하단 */}
-          <div className="mt-8 mb-6">
-            <div className="bg-gray-100 rounded-lg h-20 flex items-center justify-center text-gray-500 text-sm">
+          <div className="mt-3 mb-6">
+            <div className="bg-gray-100 rounded-lg h-16 flex items-center justify-center text-gray-500 text-sm">
               광고 공간 (728x90 / 320x50)
             </div>
           </div>
